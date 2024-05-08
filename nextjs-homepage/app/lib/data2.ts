@@ -22,12 +22,12 @@ export async function fetchStudies() {
 }
 
 export async function fetchStudyData(studyName: string) {
-    console.log(studyName)
+    console.log("From Fetch: "+studyName)
     //using placeholder data
     try{
         for(const study of studies) {
             if (study.name === studyName) {
-                console.log('From fetch: '+study.name)
+                //console.log('From fetch: '+study)
                 return study;
         }
     }

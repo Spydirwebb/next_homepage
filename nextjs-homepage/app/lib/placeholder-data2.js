@@ -6,7 +6,7 @@ const users = [
       name: 'User',
       email: 'user@nextmail.com',
       password: '123456',
-      studies: ["PROSEEK", "AGNOS", "EFC71919"]
+      studies: ["PROSEEK", "AGNOS", "EFC17919"]
     },
   ];
   const contacts = [
@@ -36,7 +36,7 @@ const users = [
       name: 'PROSEEK',
       sponsor: 'Sun Pharma',
       CRA: [],
-      websites: [],
+      websites: ['google.com', 'hogwarts.com', 'lab.com'],
       visits: [1, 2, 3, 4, 5],
       lab_kits: [],
     },
@@ -51,7 +51,7 @@ const users = [
     },
     {
       id: '3958dc9e-737f-4377-85e9-fec4b6a6442a',
-      name: 'EFC7919',
+      name: 'EFC17919',
       sponsor: 'Sanofi',
       CRA: [],
       websites: [],

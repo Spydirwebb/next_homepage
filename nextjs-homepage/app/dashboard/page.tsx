@@ -1,11 +1,12 @@
 import { Card } from '@/app/ui/dashboard/cards';
-import StudyChart from '@/app/ui/dashboard/revenue-chart';
+import StudyChart from '@/app/ui/dashboard/study-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { lusitana } from '@/app/ui/fonts';
 import { fetchStudies } from '@/app/lib/data2'
  
 export default async function Page() {
   const studies = await fetchStudies()
+
   return (
     <main>
       <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
