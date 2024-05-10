@@ -9,7 +9,7 @@ import {
 import { lusitana } from '@/app/ui/fonts';
 
 import { Study } from '@/app/lib/definitions';
-import { fetchStudyData } from '@/app/lib/data2';
+import { fetchStudyData, fetchWebsiteData } from '@/app/lib/data2';
 import { join } from 'path';
 import Link from 'next/link';
   
@@ -40,11 +40,14 @@ import Link from 'next/link';
   
 export default async function StudyCard( {study}: {study: string}) {
   const studyData = await fetchStudyData(study)
+  
   try{
+    const websiteData = await fetchWebsiteData(studyData.id)
+    console.log("from StudyCard: "+websiteData.websites)
     const data = {
       name: studyData.name,
       sponsor: studyData.sponsor,
-      websites: studyData.websites
+      websites: websiteData.websites
     }
     return <GoodCard studyData={data}/>
   } catch (err) {
@@ -61,20 +64,34 @@ export default async function StudyCard( {study}: {study: string}) {
     ); */}
   }
 
-const GoodCard = ({studyData}: Study) => {
+const GoodCard = ({studyData}) => {
   const [expanded, setExpanded] = useState(false)
   
   const handleToggleExpand = () => {
+    console.log("Expand!")
     setExpanded(!expanded);
   };
 
   return (
-  <div className="rounded-xl bg-gray-50 p-2 shadow-sm" onClick={handleToggleExpand}>
+  <div className="rounded-xl bg-gray-50 p-2 shadow-sm" >
     <div className="flex p-4">
       <h3 className="ml-2 text-sm font-medium">{studyData.name}</h3>
       <p className='ml-2 text-sm font-small'>{studyData.sponsor}</p>
     </div>
-    {expanded && (
+    <div className="ml-2 text-sm font-small">
+          <h4>Study Websites:</h4>
+          <ul>
+            {studyData.websites.map((website, index) => (
+              <li key={index}>
+                <a href={website} target="_blank" rel="noopener noreferrer">
+                  {website}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+    {/*expanded && (
         <div className="ml-2 text-sm font-small">
           <h4>Study Websites:</h4>
           <ul>
@@ -87,8 +104,8 @@ const GoodCard = ({studyData}: Study) => {
             ))}
           </ul>
         </div>
-      )}
-      <p>{expanded ? 'Collapse' : 'Expand'}</p>
+      ) */}
+      <button onClick={handleToggleExpand}>{expanded ? 'Collapse' : 'Expand'}</button>
   </div>)
 }
 

@@ -22,17 +22,30 @@ export async function fetchStudies() {
 }
 
 export async function fetchStudyData(studyName: string) {
-    console.log("From Fetch: "+studyName)
+    //console.log("From Fetch: "+studyName)
     //using placeholder data
     try{
         for(const study of studies) {
             if (study.name === studyName) {
                 //console.log('From fetch: '+study)
                 return study;
+            }   
         }
-    }
     } catch (error) {
         console.error('Database Error', error);
         throw new Error('Failed to fetch study data.');
+    }
+}
+
+export async function fetchWebsiteData(studyId: string) {
+    try{
+        for (const study of websites){
+            if (study.study_id === studyId) {
+                return study
+            }
+        }
+    } catch (error) {
+        console.error('Database Error', error)
+        throw new Error('Failed to fetch website data')
     }
 }
